@@ -458,7 +458,8 @@ project-wide `notebooks/submit.sh`. Any required individual tokens must
 remain active until at least mid-July 2026, or until grading is complete.
 If it needs models, datasets, or generated files, download or create them
 in the notebook and store large files under `/scratch`. Do not expect TAs
-to find or grade anything that exists only in `/scratch`.
+to find or grade anything that exists only in `/scratch`. The latest commit on your GitHub repository before the deadline will be used for grading and must include all required files to reproduce your results.
+
  
 **Milestone 2 — Preliminary Results (May 24)**
 - `notebooks/submit.sh`, with `GROUP` set to your team number. This
