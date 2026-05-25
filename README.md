@@ -8,7 +8,7 @@ As detailed in the [open project description](https://docs.google.com/document/d
 Please refer to the [project description - Part III - Deliverables](https://docs.google.com/document/d/1NI4UKsasYuFLxOGGzsAweCbW0XOEtc59/edit#heading=h.r9bmkwphevm1) for details.
 
 ## Rubric
-Please refer to the [project description - Part III - Rubric](TODO) for details.
+Please refer to the [project description - Part III - Rubric](https://docs.google.com/document/d/1NI4UKsasYuFLxOGGzsAweCbW0XOEtc59/edit#heading=h.bjfcgbdr5ka0) for details.
 
 ## Repo Structure
 The repository is organized as follows:
