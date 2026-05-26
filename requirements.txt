@@ -1,0 +1,38 @@
+
+torch
+
+# HuggingFace stack
+transformers>=4.35.0        # 4.35+ required for Mistral-7B-Instruct support
+accelerate                  # required by transformers for device_map="auto"
+datasets>=2.14.0
+sentence-transformers>=2.2.0
+
+# Retrieval
+faiss-cpu
+
+# Evaluation
+rouge-score
+numpy
+
+# P2 Faithfulness (RAGAS — code/p2_faithfulness/ragas.py)
+ragas
+langchain
+langchain-community
+langchain-huggingface
+langchain-openai
+# minicheck: pip install "minicheck @ git+https://github.com/Liyan06/MiniCheck.git@main"
+
+# vLLM (P2 judge server + P4 query transforms)
+vllm
+
+# Notebook analysis
+scipy
+
+# Tokenization (P3 semantic + small-to-big chunkers)
+nltk
+
+# Visualization
+matplotlib
+
+# Pandas
+pandas

@@ -1,0 +1,113 @@
+import faiss
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+
+class Retriever:
+    """
+    Dense retriever using contriever-msmarco embeddings and FAISS index.
+    
+    Workflow:
+        1. build_index(chunks): encode all chunks and store in FAISS
+        2. retrieve(query, k): find top-k most similar chunks
+    """
+
+    def __init__(self, model_name="facebook/contriever-msmarco"):
+        """
+        Args:
+            model_name: HuggingFace model for encoding chunks and queries.
+                        contriever-msmarco is trained for passage retrieval.
+        """
+        print(f"Loading retriever model: {model_name}")
+        self.model = SentenceTransformer(model_name)
+        self.index = None
+        self.chunks = []
+
+    def build_index(self, chunks):
+        """
+        Encode all chunks and build a FAISS index for fast similarity search.
+        
+        Args:
+            chunks: list of text strings (already chunked documents)
+        """
+        self.chunks = chunks
+        print(f"Encoding {len(chunks)} chunks...")
+
+        embeddings = self.model.encode(
+            chunks,
+            show_progress_bar=True,
+            convert_to_numpy=True,
+            batch_size=256,        
+            normalize_embeddings=True  # needed for cosine similarity
+        )
+
+        dim = embeddings.shape[1]
+        print(f"Embedding dimension: {dim}")
+
+        # IndexFlatIP = exact inner product search (cosine sim after normalization)
+        self.index = faiss.IndexFlatIP(dim)
+        self.index.add(embeddings)
+        print(f"FAISS index built with {self.index.ntotal} vectors")
+
+    def retrieve(self, query, k=5):
+        """
+        Retrieve top-k most relevant chunks for a query.
+        
+        Args:
+            query: question string
+            k: number of chunks to retrieve
+        
+        Returns:
+            list of k most relevant text chunks
+        """
+        if self.index is None:
+            raise RuntimeError("Index not built. Call build_index() first.")
+
+        # encode query the same way as chunks
+        query_emb = self.model.encode(
+            [query],
+            convert_to_numpy=True,
+            normalize_embeddings=True
+        )
+
+        # search FAISS index
+        scores, indices = self.index.search(query_emb, k)
+
+        return [self.chunks[i] for i in indices[0]]
+
+    def save_index(self, path):
+        """Save FAISS index to disk so you don't rebuild every run."""
+        faiss.write_index(self.index, f"{path}/faiss.index")
+        np.save(f"{path}/chunks.npy", np.array(self.chunks))
+        print(f"Index saved to {path}")
+
+    def load_index(self, path):
+        """Load a previously saved FAISS index from disk."""
+        self.index = faiss.read_index(f"{path}/faiss.index")
+        self.chunks = np.load(
+            f"{path}/chunks.npy",
+            allow_pickle=True
+        ).tolist()
+        print(f"Index loaded from {path} with {self.index.ntotal} vectors")
+
+
+if __name__ == "__main__":
+    # quick test
+    retriever = Retriever()
+    
+    sample_chunks = [
+        "The Eiffel Tower was built in 1889 in Paris France.",
+        "The moon landing happened on July 20 1969.",
+        "Python is a programming language created by Guido van Rossum.",
+        "The Great Wall of China was built over many centuries.",
+        "Albert Einstein developed the theory of relativity."
+    ]
+    
+    retriever.build_index(sample_chunks)
+    
+    query = "When was the Eiffel Tower constructed?"
+    results = retriever.retrieve(query, k=2)
+    print(f"\nQuery: {query}")
+    print(f"Top results:")
+    for i, r in enumerate(results):
+        print(f"  {i+1}. {r}")
