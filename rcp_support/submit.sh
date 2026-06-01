@@ -49,8 +49,8 @@
 set -euo pipefail
 
 # ============== EDIT THESE LINES ==============
-GASPAR="frankhau"              # <-- For local runs: your EPFL username. TAs may replace this for grading.
-GROUP="g07"                  # <-- REQUIRED FOR SUBMISSION: your team, e.g. g07.
+GASPAR="hatrouho"              # <-- For local runs: your EPFL username. TAs may replace this for grading.
+GROUP="g08"                  # <-- REQUIRED FOR SUBMISSION: your team, e.g. g07.
 # ==============================================
 
 # Refuse to run with placeholders. GASPAR is required only by whoever is
@@ -104,6 +104,18 @@ runai submit \
   --command -- /bin/bash -lc "\
     mkdir -p /scratch/hf_cache /scratch/wandb && \
     ln -sf \"\$(command -v python3)\" /usr/local/bin/python && \
+    echo '>>> Installing project dependencies...' && \
+    REQ=\$(find /scratch -maxdepth 4 -name requirements.txt 2>/dev/null | head -1) && \
+    if [ -n \"\${REQ}\" ]; then \
+      echo \"    Found \${REQ}\"; \
+      pip install -q -r \"\${REQ}\"; \
+    else \
+      echo '    requirements.txt not found, installing core packages directly'; \
+      pip install -q huggingface_hub>=0.21.0 hf_transfer transformers>=4.35.0 \
+        accelerate datasets>=2.14.0 sentence-transformers>=2.2.0 \
+        faiss-cpu rouge-score numpy scipy nltk matplotlib pandas; \
+    fi && \
+    echo '>>> Dependencies ready.' && \
     cd /scratch && \
     jupyter lab \
       --ip=0.0.0.0 --port=8888 --no-browser --allow-root \

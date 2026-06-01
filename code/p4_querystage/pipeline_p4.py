@@ -56,7 +56,7 @@ from retrieval_utils import retrieve_by_embedding, retrieve_by_text  # noqa: E40
 
 METHODS = ("baseline", "hyde", "query2doc", "rewrite")
 DEFAULT_INDEX = "/scratch/faiss_index/baseline"
-DEFAULT_RESULTS_DIR = "/scratch/results/p4"
+DEFAULT_RESULTS_DIR = "/scratch/results/p4/m3"
 
 
 # ── Loading ───────────────────────────────────────────────────────────────────
@@ -317,3 +317,95 @@ if __name__ == "__main__":
         hyde_temperature=args.hyde_temperature,
         q2d_repeat=args.q2d_repeat,
     )
+
+
+# ---------------------------
+# M3 NEW
+METHODS_M3 = ("hyde", "query2doc", "rewrite")
+
+def run_m3_ablation(
+    method: str,
+    n_questions: int = 1000,
+    question_offset: int = 0,
+    k: int = 5,
+    index_path: str = DEFAULT_INDEX,
+    results_dir: str = DEFAULT_RESULTS_DIR,
+    hyde_n_samples: int = 1,
+    hyde_include_query: bool = True,
+    hyde_temperature: float = 0.7,
+    q2d_repeat: int = 1,
+    llm: VLLMRunner = None,
+    retriever=None,
+):
+    """
+    Run one method (or all) end-to-end.
+
+    If `llm` and `retriever` are provided (e.g. when called from a notebook
+    that has already initialised them in the right order), they are reused —
+    otherwise this function constructs them here. vLLM MUST be initialised
+    before the retriever; we enforce that by importing the runner first.
+    """
+    from evaluate import evaluate, print_metrics  # noqa: PLC0415
+
+    # IMPORTANT: vLLM first.
+    if llm is None:
+        llm = VLLMRunner()
+    if retriever is None:
+        retriever = load_retriever(index_path)
+
+    questions_ds = load_questions(n_questions, question_offset)
+    modes = METHODS_M3 if method == "all" else (method,)
+
+    all_records, all_metrics = {}, {}
+    for m in modes:
+        records = run_method(
+            m, llm, retriever, questions_ds,
+            k=k,
+            hyde_n_samples=hyde_n_samples,
+            hyde_include_query=hyde_include_query,
+            hyde_temperature=hyde_temperature,
+            q2d_repeat=q2d_repeat,
+        )
+        metrics = evaluate(records)
+        print_metrics(metrics, label=f"P4 — {m}")
+        save_run(
+            m, records, metrics, results_dir,
+            n_questions=n_questions, question_offset=question_offset, k=k,
+            hyde_n_samples=hyde_n_samples,
+            hyde_include_query=hyde_include_query,
+            hyde_temperature=hyde_temperature,
+            q2d_repeat=q2d_repeat,
+        )
+        all_records[m] = records
+        all_metrics[m] = metrics
+
+    if method == "all":
+        ablation_path = os.path.join(results_dir, "p4_ablation.json")
+        with open(ablation_path, "w") as f:
+            json.dump({"metrics": all_metrics}, f, indent=2)
+        print(f"\nAblation summary → {ablation_path}")
+
+    return all_records, all_metrics
+# hyde_ablation = {}
+
+# # With the original query embedding included in the average (Eq. 8 of Gao et al.)
+# for n in (1, 4, 8):
+#     print(f'\n── HyDE N={n}, +query embedding ───────────────────────────────────')
+#     _, m = run_and_score(
+#         method='hyde',                       # dispatch key (valid for run_method)
+#         label=f'hyde_n{n}_wq',                # distinct filename per ablation run
+#         hyde_n_samples=n,
+#         hyde_include_query=True,
+#     )
+#     hyde_ablation[(n, True)] = m
+
+# # Without the query embedding in the average (Eq. 7 of Gao et al.)
+# for n in (4, 8):
+#     print(f'\n── HyDE N={n}, no query embedding ─────────────────────────────────')
+#     _, m = run_and_score(
+#         method='hyde',
+#         label=f'hyde_n{n}_noq',
+#         hyde_n_samples=n,
+#         hyde_include_query=False,
+#     )
+#     hyde_ablation[(n, False)] = m
