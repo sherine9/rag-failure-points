@@ -25,6 +25,10 @@ langchain-openai
 # vLLM (P2 judge server + P4 query transforms)
 vllm
 
+# HuggingFace Hub (result download in notebooks + fast transfers)
+huggingface_hub>=0.21.0
+hf_transfer               # enables HF_HUB_ENABLE_HF_TRANSFER=1 speedup
+
 # Notebook analysis
 scipy
 

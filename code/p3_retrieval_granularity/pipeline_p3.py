@@ -4,10 +4,15 @@ P3 Retrieval Granularity Pipeline
 Swaps the chunking strategy while keeping all other pipeline components
 (retriever model, generator, evaluation) identical to the shared baseline.
 
-Supported chunkers: fixed | semantic | small_to_big | proposition
+Supported chunkers: fixed | semantic | small_to_big | proposition |
+                    sentence_only | sentence_window
+
+sentence_only and sentence_window share the small_to_big FAISS embeddings.
+Run build_sentence_variants.py to create their indices before using them.
 
 Usage:
     python pipeline_p3.py --chunker semantic
+    python pipeline_p3.py --chunker sentence_only --n_questions 1000
     python pipeline_p3.py --chunker proposition --n_wiki 1000
 """
 import os
@@ -32,12 +37,16 @@ import fixed
 import semantic
 import small_to_big
 import proposition
+import sentence_only
+import sentence_window
 
 _CHUNKER_MODS = {
-    'fixed':        fixed,
-    'semantic':     semantic,
-    'small_to_big': small_to_big,
-    'proposition':  proposition,
+    'fixed':           fixed,
+    'semantic':        semantic,
+    'small_to_big':    small_to_big,
+    'proposition':     proposition,
+    'sentence_only':   sentence_only,
+    'sentence_window': sentence_window,
 }
 
 
@@ -95,7 +104,10 @@ def run_pipeline(
             _build_proposition_index(retriever, documents, n_wiki, generator)
         elif chunker_name == 'small_to_big':
             _build_s2b_index(retriever, documents, n_wiki)
+        elif chunker_name == 'sentence_window':
+            _build_sentence_window_index(retriever, documents, n_wiki)
         else:
+            # fixed, semantic, sentence_only: embed == store unit
             _build_standard_index(retriever, documents, n_wiki, chunker_name)
 
         os.makedirs(index_path, exist_ok=True)
@@ -183,6 +195,42 @@ def _build_s2b_index(retriever, documents, n_wiki):
     print(f"Small-to-big index: {retriever.index.ntotal} sentence vectors → paragraphs returned on retrieval")
 
 
+def _build_sentence_window_index(retriever, documents, n_wiki):
+    """
+    Sentence-window: embed anchor sentences, return ±1 sentence window.
+
+    Same retrieval unit as small_to_big (sentence embeddings), but the
+    generation unit is a tight 3-sentence window instead of the full
+    parent paragraph. Isolates how much context around the answer is
+    actually needed by the generator.
+
+    Fast path: if the small_to_big index is already built, prefer
+    build_sentence_variants.py which copies the faiss.index without
+    re-encoding. This function is the from-scratch fallback.
+    """
+    sentences, windows = [], []
+    for i, doc in enumerate(documents):
+        for sent, win in sentence_window.get_window_pairs(doc):
+            sentences.append(sent)
+            windows.append(win)
+        if i % 5000 == 0:
+            print(f"  Processed {i}/{n_wiki} articles → {len(sentences)} pairs")
+    print(f"Total sentence-window pairs: {len(sentences)}")
+
+    print(f"Encoding {len(sentences)} sentences...")
+    embeddings = retriever.model.encode(
+        sentences,
+        show_progress_bar=True,
+        convert_to_numpy=True,
+        batch_size=256,
+        normalize_embeddings=True,
+    )
+    retriever.chunks = windows
+    retriever.index  = faiss.IndexFlatIP(embeddings.shape[1])
+    retriever.index.add(embeddings)
+    print(f"Sentence-window index: {retriever.index.ntotal} sentence vectors → windows returned on retrieval")
+
+
 def _build_proposition_index(retriever, documents, n_wiki, generator):
     all_props = []
     for i, doc in enumerate(documents):
@@ -197,10 +245,12 @@ def _build_proposition_index(retriever, documents, n_wiki, generator):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="P3 retrieval granularity pipeline")
-    parser.add_argument("--chunker",     required=True, choices=list(_CHUNKER_MODS))
-    parser.add_argument("--n_wiki",      type=int, default=200_000)
-    parser.add_argument("--n_questions", type=int, default=100)
-    parser.add_argument("--k",           type=int, default=5)
+    parser.add_argument("--chunker",      required=True, choices=sorted(_CHUNKER_MODS))
+    parser.add_argument("--n_wiki",       type=int, default=200_000)
+    parser.add_argument("--n_questions",  type=int, default=100)
+    parser.add_argument("--k",            type=int, default=5)
+    parser.add_argument("--results_path", type=str, default=None,
+                        help="Override default output path (default: /scratch/results/p3_<chunker>.json)")
     args = parser.parse_args()
 
     run_pipeline(
@@ -208,4 +258,5 @@ if __name__ == "__main__":
         n_wiki=args.n_wiki,
         n_questions=args.n_questions,
         k=args.k,
+        results_path=args.results_path,
     )
