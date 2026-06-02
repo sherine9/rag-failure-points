@@ -44,7 +44,8 @@ class SamplingConfig:
 READER_SAMPLING    = SamplingConfig(temperature=0.0, max_tokens=100, stop=["</s>"])
 HYDE_SAMPLING      = SamplingConfig(temperature=0.7, max_tokens=160, stop=["</s>", "\n\n"])
 QUERY2DOC_SAMPLING = SamplingConfig(temperature=1.0, max_tokens=128, stop=["</s>", "\nQuery:"])
-REWRITE_SAMPLING   = SamplingConfig(temperature=0.0, max_tokens=40,  stop=["</s>", "\n", "Original:"])
+REWRITE_SAMPLING   = SamplingConfig(temperature=1.0, max_tokens=40,  stop=["</s>", "\n", "Original:"])
+REWRITE_MULTI_SAMPLING = SamplingConfig(temperature=1.0, max_tokens=150, stop=["</s>", "\n", "Original:"])
 
 
 class VLLMRunner:
@@ -80,7 +81,23 @@ class VLLMRunner:
             kwargs["download_dir"] = download_dir
         self.llm = LLM(**kwargs)
         self.tokenizer = self.llm.get_tokenizer()
+        # M3 NEW: the seed applied to every subsequent generate() call.
+        # Only affects sampling temperature > 0 (HyDE T=0.7, Query2doc T=1.0).
+        # Greedy decoding (reader T=0, single-rewrite T=0) is deterministic
+        # regardless. Use set_seed() to switch between seeds without
+        # re-instantiating the engine (which would re-load Mistral, ~2 min).
+        self._seed: int = 0
         print("vLLM ready.")
+
+    # M3 NEW
+    def set_seed(self, seed: int) -> None:
+        """Set the seed used by subsequent generate()/generate_n_samples() calls.
+
+        Used by the M3 test phase to reproduce a multi-seed evaluation of
+        stochastic methods (HyDE T=0.7, Query2doc T=1.0). Deterministic
+        methods (baseline, reader, single-rewrite) are unaffected.
+        """
+        self._seed = int(seed)
 
     # ── Prompt formatting ─────────────────────────────────────────────────────
     def to_chat(self, user_prompt: str) -> str:
@@ -108,6 +125,7 @@ class VLLMRunner:
             top_p=sampling.top_p,
             n=sampling.n,
             stop=sampling.stop or [],
+            seed=self._seed,                    # M3 NEW: per-run reproducibility
         )
         outputs = self.llm.generate(prompts, params)
         # vLLM returns outputs in input order
@@ -135,6 +153,7 @@ class VLLMRunner:
             top_p=sampling.top_p,
             n=n_samples,
             stop=sampling.stop or [],
+            seed=self._seed,                    # M3 NEW: per-run reproducibility
         )
         outputs = self.llm.generate(prompts, params)
         return [[o.text.strip() for o in out.outputs] for out in outputs]

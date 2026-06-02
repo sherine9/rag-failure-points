@@ -152,6 +152,92 @@ def build_rewrite_prompt(question: str) -> str:
     return "\n".join(parts)
 
 
+# ── M3 NEW: Multi-query Rewrite (Ma et al. 2023 canonical variant) ────────────
+# The M2 implementation simplified Ma et al. to a single-query rewrite. The
+# canonical paper version produces MULTIPLE queries per question, separated
+# by ';', and retrieves chunks from each before merging them for the reader.
+# We re-introduce this variant as a tuning axis in M3: sweeping
+# rewrite_n_queries ∈ {1, 2, 3} tells us whether the M2 failure mode came
+# from the single-query simplification or from over-canonicalization
+# (both hypotheses are testable on the resulting numbers).
+REWRITE_MULTI_INSTRUCTION = (
+    "Rewrite the question below into exactly {n} different search queries that a web "
+    "search engine could answer. Each query should target a complementary facet of "
+    "the question (e.g. one for the entity, one for the time/place, one for the "
+    "relation). Keep all named entities, dates, and numbers from the original. "
+    "Separate the queries with ';' and output only the queries, no preamble."
+)
+
+# Few-shots for the multi-query rewriter. Hand-crafted in NQ style (not drawn
+# from the train set, see prompts.py header for the rationale).
+#
+# IMPORTANT — each example here lists the MAXIMUM number of queries we support
+# (3, matching the largest n_queries value in our ablation grid). At prompt-build
+# time, build_rewrite_multi_prompt truncates each example's queries to match
+# the requested n_queries. This keeps the demonstrations consistent with the
+# instruction's "{n}" — without this, in-context learning would dominate the
+# instruction and the LLM would emit 3 queries even when we asked for 2.
+REWRITE_MULTI_FEWSHOTS = [
+    {
+        "original": "who scored the first goal in the 2014 fifa world cup final",
+        "rewritten": [
+            "first goal 2014 FIFA World Cup final scorer",
+            "2014 World Cup final goalscorers",
+            "Germany Argentina 2014 World Cup final goals",
+        ],
+    },
+    {
+        "original": "when did the band the rolling stones release their first album",
+        "rewritten": [
+            "Rolling Stones debut album release date",
+            "first Rolling Stones studio album year",
+            "The Rolling Stones discography 1964",
+        ],
+    },
+]
+
+
+def build_rewrite_multi_prompt(question: str, n_queries: int = 3) -> str:
+    """M3 multi-query rewriter prompt — produces `n_queries` queries separated by ';'.
+
+    The few-shot examples in REWRITE_MULTI_FEWSHOTS are stored as lists of
+    3 queries each and TRUNCATED here to `n_queries`. This keeps the
+    demonstrations coherent with the instruction's "{n}" parameter — without
+    this truncation, the LLM would tend to copy the demonstration count
+    (3 queries) regardless of what the instruction asked for.
+
+    Used by query_transforms.transform_rewrite when n_queries > 1. The
+    n_queries=1 case is delegated to build_rewrite_prompt above to preserve
+    M2 behaviour exactly.
+    """
+    if n_queries < 2:
+        raise ValueError(
+            f"build_rewrite_multi_prompt: n_queries must be ≥ 2 "
+            f"(got {n_queries}). Use build_rewrite_prompt for n_queries=1."
+        )
+    if n_queries > len(REWRITE_MULTI_FEWSHOTS[0]["rewritten"]):
+        # If we ever extend the ablation grid past n=3, we'd need to add more
+        # queries to each example here. Fail loudly rather than silently
+        # under-demonstrate the requested count.
+        raise ValueError(
+            f"build_rewrite_multi_prompt: only {len(REWRITE_MULTI_FEWSHOTS[0]['rewritten'])} "
+            f"few-shot queries available per example, but n_queries={n_queries} requested. "
+            f"Extend REWRITE_MULTI_FEWSHOTS."
+        )
+
+    parts = [REWRITE_MULTI_INSTRUCTION.format(n=n_queries), ""]
+    for ex in REWRITE_MULTI_FEWSHOTS:
+        # Truncate to n_queries so demonstrations match the instruction.
+        rewritten = "; ".join(ex["rewritten"][:n_queries])
+        parts.append(f"Original: {ex['original']}")
+        parts.append(f"Rewritten: {rewritten}")
+        parts.append("")
+    parts.append(f"Original: {question}")
+    parts.append("Rewritten:")
+    return "\n".join(parts)
+# ── end M3 NEW ────────────────────────────────────────────────────────────────
+
+
 # ── Reader (answer generation) ─────────────────────────────────────────────────
 # BYTE-FOR-BYTE identical to code/baseline/generator.py:Generator.build_prompt
 # so any metric delta is attributable to the retrieval stage alone.

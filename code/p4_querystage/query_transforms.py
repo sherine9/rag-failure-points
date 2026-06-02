@@ -27,13 +27,19 @@ from prompts import (
     build_hyde_prompt,
     build_query2doc_prompt,
     build_rewrite_prompt,
+    build_rewrite_multi_prompt,           # M3 NEW: multi-query rewrite prompt
     compose_query2doc,
 )
-from retrieval_utils import encode_texts
+# M3 NEW: also import retrieve_by_text — multi-query rewrite does its own
+# retrieval inside the transform (one search per generated query, then merge),
+# so this transform cannot defer to the pipeline's retrieve() step the way
+# HyDE/Q2D/single-rewrite do.
+from retrieval_utils import encode_texts, retrieve_by_text
 from vllm_runner import (
     HYDE_SAMPLING,
     QUERY2DOC_SAMPLING,
     REWRITE_SAMPLING,
+    REWRITE_MULTI_SAMPLING,
     VLLMRunner,
 )
 
@@ -43,18 +49,25 @@ class QueryTransformResult:
     """
     Output of a query-stage transform.
 
-    Exactly one of {retrieval_texts, retrieval_embeddings} is populated;
-    the pipeline calls retrieve_by_text or retrieve_by_embedding accordingly.
+    Exactly one of {retrieval_texts, retrieval_embeddings, precomputed_chunks}
+    is populated; the pipeline dispatches retrieval accordingly:
+        - retrieval_texts        → retrieve_by_text
+        - retrieval_embeddings   → retrieve_by_embedding
+        - precomputed_chunks     → skip retrieval (transform did it itself)
 
     Fields:
         intermediates: per-question artefact for analysis / case studies
                        (the pseudo-doc, the rewritten query, etc.)
         retrieval_texts: text to feed the retriever's encoder (or None)
         retrieval_embeddings: pre-encoded embeddings (or None)
+        precomputed_chunks: M3 NEW — chunks already retrieved inside the
+                       transform (used by multi-query rewrite, which runs
+                       one FAISS search per generated query and merges)
     """
     intermediates: List[str]
     retrieval_texts: Optional[List[str]] = None
     retrieval_embeddings: Optional[np.ndarray] = None
+    precomputed_chunks: Optional[List[List[str]]] = None    # M3 NEW
 
 
 # ── HyDE (Gao et al. 2022) ────────────────────────────────────────────────────
@@ -145,27 +158,89 @@ def transform_query2doc(
 
 
 # ── Rewrite-Retrieve-Read (Ma et al. 2023) ────────────────────────────────────
+# M3 NEW: transform_rewrite now accepts `n_queries` to support both the M2
+# single-query variant (n_queries=1, default) and the multi-query canonical
+# variant from Ma et al. 2023 (n_queries>1). This is the central new ablation
+# axis for the Rewrite method in M3.
 def transform_rewrite(
     llm: VLLMRunner,
     questions: List[str],
+    n_queries: int = 1,                # M3 NEW
+    retriever=None,                    # M3 NEW: required when n_queries > 1
+    k: int = 5,                        # M3 NEW: chunks per generated query
 ) -> QueryTransformResult:
     """
-    LLM-based query rewriter. Ma et al. propose a multi-query, step-by-step
-    output; we simplify to a single rewrite because (i) NQ Open is single-hop
-    and (ii) downstream we encode a single string. The rewritten string is
-    parsed defensively in case the LLM adds preamble.
-    """
-    prompts = [build_rewrite_prompt(q) for q in questions]
-    raw = llm.generate(prompts, REWRITE_SAMPLING)
+    LLM-based query rewriter.
 
-    rewritten = []
+    n_queries=1 (M2 variant, default):
+        Single-query rewrite. The rewritten string is returned as
+        `retrieval_texts` and the pipeline performs one FAISS search.
+
+    n_queries>1 (M3 NEW — Ma et al. 2023 canonical variant):
+        The LLM generates `n_queries` complementary queries separated by ';'.
+        Each query is fed to the retriever (k chunks each), and the chunks
+        are merged + deduplicated to top-k overall. Because retrieval is
+        done INSIDE the transform, we return the merged chunks as
+        `precomputed_chunks` and the pipeline skips its own retrieval step.
+        Requires `retriever=` to be passed.
+    """
+    if n_queries == 1:
+        # ── M2 single-query path — UNCHANGED behaviour ────────────────────────
+        prompts = [build_rewrite_prompt(q) for q in questions]
+        raw = llm.generate(prompts, REWRITE_SAMPLING)
+        rewritten = [_clean_single_rewrite(orig, r)
+                     for orig, r in zip(questions, raw)]
+        return QueryTransformResult(intermediates=rewritten,
+                                    retrieval_texts=rewritten)
+
+    # ── M3 NEW: multi-query path (Ma et al. 2023 canonical) ───────────────────
+    if retriever is None:
+        raise ValueError(
+            "transform_rewrite with n_queries>1 requires `retriever=` "
+            "because multi-query rewriting runs FAISS searches internally."
+        )
+
+    prompts = [build_rewrite_multi_prompt(q, n_queries=n_queries)
+               for q in questions]
+    raw = llm.generate(prompts, REWRITE_MULTI_SAMPLING)
+
+    all_chunks, intermediates = [], []
     for orig, r in zip(questions, raw):
-        cleaned = r.strip()
-        # drop common preambles like "Rewritten:" if the model echoes the tag
-        for prefix in ("Rewritten:", "Rewrite:", "Query:", "Answer:"):
-            if cleaned.lower().startswith(prefix.lower()):
-                cleaned = cleaned[len(prefix):].strip()
-        # one line only
-        cleaned = cleaned.split("\n", 1)[0].strip().strip('"').strip("'")
-        rewritten.append(cleaned if cleaned else orig)
-    return QueryTransformResult(intermediates=rewritten, retrieval_texts=rewritten)
+        # Parse the ';'-separated queries; defensive fallback to the original
+        # question if the LLM produces an unusable output.
+        queries = [q.strip() for q in r.split(';') if q.strip()]
+        if not queries:
+            queries = [orig]
+        # Cap to n_queries (the LLM sometimes emits more than requested).
+        queries = queries[:n_queries]
+        intermediates.append(" ; ".join(queries))
+
+        # Batched FAISS search across the N queries, then merge + dedup.
+        chunk_lists, _ = retrieve_by_text(retriever, queries, k=k)
+        seen, merged = set(), []
+        for cl in chunk_lists:
+            for c in cl:
+                key = c[:80]            # short fingerprint for dedup
+                if key not in seen:
+                    seen.add(key)
+                    merged.append(c)
+        all_chunks.append(merged[:k])
+
+    return QueryTransformResult(
+        intermediates=intermediates,
+        precomputed_chunks=all_chunks,  # M3 NEW: signals pipeline to skip retrieve()
+    )
+
+
+# M3 NEW: factored out of the old transform_rewrite body so the n_queries=1
+# branch above can reuse the exact same parsing the M2 version used.
+def _clean_single_rewrite(orig: str, raw: str) -> str:
+    """Parse a single rewrite, defensively stripping preambles/quotes.
+    Falls back to `orig` if the cleaned string is empty.
+    """
+    cleaned = raw.strip()
+    for prefix in ("Rewritten:", "Rewrite:", "Query:", "Answer:"):
+        if cleaned.lower().startswith(prefix.lower()):
+            cleaned = cleaned[len(prefix):].strip()
+    cleaned = cleaned.split("\n", 1)[0].strip().strip('"').strip("'")
+    return cleaned if cleaned else orig
