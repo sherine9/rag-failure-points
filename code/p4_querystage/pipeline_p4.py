@@ -338,6 +338,12 @@ METHODS_M3 = (
     ("rewrite",   "rewrite_n1",       1, True,  1, 1),
     ("rewrite",   "rewrite_n2",       1, True,  1, 2),
     ("rewrite",   "rewrite_n3",       1, True,  1, 3),
+    # test baseline to compare
+    # ("hyde",      "hyde_n1_wq_100q",       1, True,  1, 1),
+    # ("hyde",      "hyde_n4_wq_100q",       4, True,  1, 1),
+    # ("hyde",      "hyde_n8_wq_100q",       8, True,  1, 1),
+    # ("hyde",      "hyde_n4_noq_100q",      4, False, 1, 1),
+    # ("hyde",      "hyde_n8_noq_100q",      8, False, 1, 1),
 )
 
 
@@ -347,10 +353,14 @@ METHODS_M3 = (
 # expanded with the seed in run_m3_test (e.g. "best_hyde_seed0").
 BEST_CONFIGS_M3 = (
     # (method,      label,            n_samples, include_q, q2d_rep, rw_n)
-    ("baseline",    "best_baseline",  1, True,  1, 1),                   # always greedy
-    ("hyde",        "best_hyde",      8, True,  1, 1),                   # ← REPLACE after ablation
-    ("query2doc",   "best_query2doc", 1, True,  1, 1),                   # ← REPLACE after ablation
-    ("rewrite",     "best_rewrite",   1, True,  1, 1),                   # ← REPLACE after ablation
+    # ("baseline",    "best_baseline",  1, True,  1, 1),                   # always greedy
+    # ("hyde",        "best_hyde",      8, True,  1, 1),                   # ← REPLACE after ablation
+    # ("query2doc",   "best_query2doc", 1, True,  1, 1),                   # ← REPLACE after ablation
+    # ("rewrite",     "best_rewrite",   1, True,  1, 1),                   # ← REPLACE after ablation
+    ("hyde",        "hyde_n8_wq_1000qavgtest",         8, True,  1, 1),
+    ("hyde",        "hyde_n4_noq_1000qavgtest",        4, False, 1, 1),
+    ("query2doc",   "query2doc_rep1_1000qavgtest",     1, True,  1, 1),
+    ("query2doc",   "query2doc_rep3_1000qavgtest",     1, True,  3, 1),
 )
 
 
