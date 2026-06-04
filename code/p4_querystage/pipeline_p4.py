@@ -353,16 +353,15 @@ METHODS_M3 = (
 # expanded with the seed in run_m3_test (e.g. "best_hyde_seed0").
 BEST_CONFIGS_M3 = (
     # (method,      label,            n_samples, include_q, q2d_rep, rw_n)
-    # ("baseline",    "best_baseline",  1, True,  1, 1),                   # always greedy
-    # ("hyde",        "best_hyde",      8, True,  1, 1),                   # ← REPLACE after ablation
-    # ("query2doc",   "best_query2doc", 1, True,  1, 1),                   # ← REPLACE after ablation
-    # ("rewrite",     "best_rewrite",   1, True,  1, 1),                   # ← REPLACE after ablation
-    ("hyde",        "hyde_n8_wq_1000qavgtest",         8, True,  1, 1),
-    ("hyde",        "hyde_n4_noq_1000qavgtest",        4, False, 1, 1),
-    ("query2doc",   "query2doc_rep1_1000qavgtest",     1, True,  1, 1),
-    ("query2doc",   "query2doc_rep3_1000qavgtest",     1, True,  3, 1),
+    ("baseline",    "best_baseline",  1, True,  1, 1),
+    ("hyde",        "best_hyde",      8, True,  1, 1),    # Eq.8 paper-canonical (Gao §3.2)
+    ("query2doc",   "best_query2doc", 1, True,  1, 1),    # rep=1 paper-default for dense (Wang §3)
+    ("rewrite",     "best_rewrite",   1, True,  1, 3),    # multi-query (Ma et al. canonical)
+    # ("hyde",        "hyde_n8_wq_1000qavgtest",         8, True,  1, 1),
+    # ("hyde",        "hyde_n4_noq_1000qavgtest",        4, False, 1, 1),
+    # ("query2doc",   "query2doc_rep1_1000qavgtest",     1, True,  1, 1),
+    # ("query2doc",   "query2doc_rep3_1000qavgtest",     1, True,  3, 1),
 )
-
 
 def run_m3_ablation(
     n_questions: int = 1000,

@@ -69,7 +69,9 @@ def run_pipeline(
         os.makedirs(index_path, exist_ok=True)
         retriever.save_index(index_path)
 
-    # Step 3: Load NQ Open questions 
+    # Step 3: Load NQ Open questions
+    # NOTE: this takes the first n_questions of the validation split without
+    # shuffling — a known limitation documented in the report.
     print("Loading NQ Open...")
     ds = load_dataset("nq_open", split="validation")
     ds = ds.select(range(n_questions))
