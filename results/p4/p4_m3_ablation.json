@@ -1,0 +1,42 @@
+{
+  "n_questions": 100,
+  "question_offset": 0,
+  "k": 5,
+  "metrics": {
+    "hyde_n1_wq_100q": {
+      "exact_match": 0.1,
+      "rouge_l": 0.1869,
+      "token_f1": 0.1856,
+      "retrieval_hit_rate": 0.38,
+      "n_samples": 100
+    },
+    "hyde_n4_wq_100q": {
+      "exact_match": 0.08,
+      "rouge_l": 0.1466,
+      "token_f1": 0.1441,
+      "retrieval_hit_rate": 0.4,
+      "n_samples": 100
+    },
+    "hyde_n8_wq_100q": {
+      "exact_match": 0.09,
+      "rouge_l": 0.1573,
+      "token_f1": 0.1554,
+      "retrieval_hit_rate": 0.4,
+      "n_samples": 100
+    },
+    "hyde_n4_noq_100q": {
+      "exact_match": 0.06,
+      "rouge_l": 0.1367,
+      "token_f1": 0.1344,
+      "retrieval_hit_rate": 0.41,
+      "n_samples": 100
+    },
+    "hyde_n8_noq_100q": {
+      "exact_match": 0.1,
+      "rouge_l": 0.1718,
+      "token_f1": 0.1696,
+      "retrieval_hit_rate": 0.39,
+      "n_samples": 100
+    }
+  }
+}

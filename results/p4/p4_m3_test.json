@@ -1,0 +1,212 @@
+{
+  "n_questions": 2610,
+  "question_offset": 1000,
+  "k": 5,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "summary": {
+    "best_baseline": {
+      "method": "baseline",
+      "config": {
+        "hyde_n_samples": 1,
+        "hyde_include_query": true,
+        "q2d_repeat": 1,
+        "rewrite_n_queries": 1
+      },
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "aggregated_metrics": {
+        "exact_match": {
+          "mean": 0.0341,
+          "std": 0.0,
+          "values": [
+            0.0341
+          ]
+        },
+        "rouge_l": {
+          "mean": 0.1093,
+          "std": 0.0,
+          "values": [
+            0.1093
+          ]
+        },
+        "token_f1": {
+          "mean": 0.1037,
+          "std": 0.0,
+          "values": [
+            0.1037
+          ]
+        },
+        "retrieval_hit_rate": {
+          "mean": 0.269,
+          "std": 0.0,
+          "values": [
+            0.269
+          ]
+        }
+      }
+    },
+    "best_hyde": {
+      "method": "hyde",
+      "config": {
+        "hyde_n_samples": 8,
+        "hyde_include_query": true,
+        "q2d_repeat": 1,
+        "rewrite_n_queries": 1
+      },
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "aggregated_metrics": {
+        "exact_match": {
+          "mean": 0.04596666666666666,
+          "std": 0.001386842937514315,
+          "values": [
+            0.0475,
+            0.0456,
+            0.0448
+          ]
+        },
+        "rouge_l": {
+          "mean": 0.12873333333333334,
+          "std": 0.0008144527815247073,
+          "values": [
+            0.1291,
+            0.1278,
+            0.1293
+          ]
+        },
+        "token_f1": {
+          "mean": 0.12383333333333334,
+          "std": 0.0007234178138070237,
+          "values": [
+            0.1243,
+            0.123,
+            0.1242
+          ]
+        },
+        "retrieval_hit_rate": {
+          "mean": 0.3236333333333333,
+          "std": 0.0014571661996262792,
+          "values": [
+            0.3226,
+            0.323,
+            0.3253
+          ]
+        }
+      }
+    },
+    "best_query2doc": {
+      "method": "query2doc",
+      "config": {
+        "hyde_n_samples": 1,
+        "hyde_include_query": true,
+        "q2d_repeat": 1,
+        "rewrite_n_queries": 1
+      },
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "aggregated_metrics": {
+        "exact_match": {
+          "mean": 0.04686666666666667,
+          "std": 0.0015631165450257836,
+          "values": [
+            0.0471,
+            0.0452,
+            0.0483
+          ]
+        },
+        "rouge_l": {
+          "mean": 0.12896666666666667,
+          "std": 0.001171893055416465,
+          "values": [
+            0.1285,
+            0.1281,
+            0.1303
+          ]
+        },
+        "token_f1": {
+          "mean": 0.12423333333333335,
+          "std": 0.0010969655114602883,
+          "values": [
+            0.1236,
+            0.1236,
+            0.1255
+          ]
+        },
+        "retrieval_hit_rate": {
+          "mean": 0.3096,
+          "std": 0.0036428011200174116,
+          "values": [
+            0.3073,
+            0.3138,
+            0.3077
+          ]
+        }
+      }
+    },
+    "best_rewrite": {
+      "method": "rewrite",
+      "config": {
+        "hyde_n_samples": 1,
+        "hyde_include_query": true,
+        "q2d_repeat": 1,
+        "rewrite_n_queries": 3
+      },
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "aggregated_metrics": {
+        "exact_match": {
+          "mean": 0.0346,
+          "std": 0.000953939201416945,
+          "values": [
+            0.0345,
+            0.0356,
+            0.0337
+          ]
+        },
+        "rouge_l": {
+          "mean": 0.10896666666666667,
+          "std": 0.0008736894948054144,
+          "values": [
+            0.1092,
+            0.108,
+            0.1097
+          ]
+        },
+        "token_f1": {
+          "mean": 0.10509999999999999,
+          "std": 0.0008185352771872414,
+          "values": [
+            0.1049,
+            0.1044,
+            0.106
+          ]
+        },
+        "retrieval_hit_rate": {
+          "mean": 0.2537666666666667,
+          "std": 0.0019425069712444719,
+          "values": [
+            0.2533,
+            0.2559,
+            0.2521
+          ]
+        }
+      }
+    }
+  }
+}
