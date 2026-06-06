@@ -150,10 +150,80 @@ def retrieve(retriever, transform: QueryTransformResult, k: int):
 
 
 # ── Reader step ───────────────────────────────────────────────────────────────
+# def generate_answers(llm: VLLMRunner, questions: List[str],
+#                      chunks_per_q: List[List[str]]) -> List[str]:
+#     """Batched answer generation with the shared reader prompt."""
+#     prompts = [build_reader_prompt(q, ctx) for q, ctx in zip(questions, chunks_per_q)]
+#     return llm.generate(prompts, READER_SAMPLING)
+
+# ── Reader step ───────────────────────────────────────────────────────────────
 def generate_answers(llm: VLLMRunner, questions: List[str],
-                     chunks_per_q: List[List[str]]) -> List[str]:
-    """Batched answer generation with the shared reader prompt."""
-    prompts = [build_reader_prompt(q, ctx) for q, ctx in zip(questions, chunks_per_q)]
+                     chunks_per_q: List[List[str]],
+                     max_prompt_tokens: int = 3900) -> List[str]:
+    """Batched answer generation with the shared reader prompt.
+
+    M3 NEW: token-precise per-chunk truncation against prompt overflow.
+
+    The baseline (code/baseline/generator.py) uses `truncation=True` on the
+    HF tokenizer, which silently cuts the END of the prompt — including the
+    QUESTION and the [/INST] closing tag — when total length exceeds 4096
+    tokens. This silently degrades ~1–5% of outputs on outlier NQ Open
+    questions whose retrieved chunks tokenise unusually densely (technical
+    jargon, foreign scripts, mixed UTF-8). On vLLM the same overflow raises
+    a hard ValueError instead.
+
+    Our handling preserves the question intact by truncating the *context
+    chunks* rather than the prompt tail. The procedure per question:
+
+      1. Measure the prompt overhead in tokens by building the prompt with
+         EMPTY chunks (= boilerplate + chunk markers + question + closing).
+      2. Budget for chunk contents = max_prompt_tokens − overhead.
+      3. Per-chunk budget = budget / k, distributed equally.
+      4. Tokenise each chunk, cap at per-chunk budget, decode back.
+      5. Re-assemble the final prompt.
+
+    This is token-precise (no char/token ratio guesswork) and inactive on
+    the vast majority of chunks. It applies uniformly across all P4
+    methods, preserving the fairness of within-track comparisons.
+
+    Args:
+        max_prompt_tokens: cap on the assembled prompt length, leaving
+            ~200 tokens of headroom below vLLM's max_model_len=4096
+            after accounting for the chat template wrap (`<s>[INST]...`)
+            and the 100-token reader output budget.
+    """
+    tokenizer = llm.tokenizer
+    prompts = []
+
+    for q, ctx in zip(questions, chunks_per_q):
+        # ── Step 1: measure overhead = prompt skeleton with empty chunks ─────
+        # Empty strings preserve the structural overhead (boilerplate +
+        # "Passage N: " markers + "Question: {q}" + closing tag), and only
+        # the chunk *content* tokens are missing.
+        skeleton = build_reader_prompt(q, [""] * len(ctx))
+        overhead = len(tokenizer(skeleton, add_special_tokens=False)["input_ids"])
+
+        # ── Step 2: budget for chunk contents ───────────────────────────────
+        budget = max_prompt_tokens - overhead
+        if budget <= 0 or not ctx:
+            # Pathological case: even the empty skeleton exceeds the budget.
+            # Fall through with the original chunks; vLLM will raise. This
+            # should never trigger for NQ Open questions.
+            prompts.append(build_reader_prompt(q, ctx))
+            continue
+        per_chunk_budget = max(20, budget // len(ctx))
+
+        # ── Step 3: token-precise per-chunk truncation ──────────────────────
+        truncated_ctx = []
+        for c in ctx:
+            ids = tokenizer(c, add_special_tokens=False)["input_ids"]
+            if len(ids) > per_chunk_budget:
+                ids = ids[:per_chunk_budget]
+                c = tokenizer.decode(ids, skip_special_tokens=True)
+            truncated_ctx.append(c)
+
+        prompts.append(build_reader_prompt(q, truncated_ctx))
+
     return llm.generate(prompts, READER_SAMPLING)
 
 
@@ -338,6 +408,12 @@ METHODS_M3 = (
     ("rewrite",   "rewrite_n1",       1, True,  1, 1),
     ("rewrite",   "rewrite_n2",       1, True,  1, 2),
     ("rewrite",   "rewrite_n3",       1, True,  1, 3),
+    # test baseline to compare
+    # ("hyde",      "hyde_n1_wq_100q",       1, True,  1, 1),
+    # ("hyde",      "hyde_n4_wq_100q",       4, True,  1, 1),
+    # ("hyde",      "hyde_n8_wq_100q",       8, True,  1, 1),
+    # ("hyde",      "hyde_n4_noq_100q",      4, False, 1, 1),
+    # ("hyde",      "hyde_n8_noq_100q",      8, False, 1, 1),
 )
 
 
@@ -347,12 +423,15 @@ METHODS_M3 = (
 # expanded with the seed in run_m3_test (e.g. "best_hyde_seed0").
 BEST_CONFIGS_M3 = (
     # (method,      label,            n_samples, include_q, q2d_rep, rw_n)
-    ("baseline",    "best_baseline",  1, True,  1, 1),                   # always greedy
-    ("hyde",        "best_hyde",      8, True,  1, 1),                   # ← REPLACE after ablation
-    ("query2doc",   "best_query2doc", 1, True,  1, 1),                   # ← REPLACE after ablation
-    ("rewrite",     "best_rewrite",   1, True,  1, 1),                   # ← REPLACE after ablation
+    ("baseline",    "best_baseline",  1, True,  1, 1),
+    ("hyde",        "best_hyde",      8, True,  1, 1),    # Eq.8 paper-canonical (Gao §3.2)
+    ("query2doc",   "best_query2doc", 1, True,  1, 1),    # rep=1 paper-default for dense (Wang §3)
+    ("rewrite",     "best_rewrite",   1, True,  1, 3),    # multi-query (Ma et al. canonical)
+    # ("hyde",        "hyde_n8_wq_1000qavgtest",         8, True,  1, 1),
+    # ("hyde",        "hyde_n4_noq_1000qavgtest",        4, False, 1, 1),
+    # ("query2doc",   "query2doc_rep1_1000qavgtest",     1, True,  1, 1),
+    # ("query2doc",   "query2doc_rep3_1000qavgtest",     1, True,  3, 1),
 )
-
 
 def run_m3_ablation(
     n_questions: int = 1000,
