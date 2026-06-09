@@ -1,0 +1,55 @@
+{
+  "n_questions": 100,
+  "question_offset": 0,
+  "k": 5,
+  "modes": {
+    "no_retrieval": {
+      "metrics": {
+        "exact_match": 0.07,
+        "rouge_l": 0.2753,
+        "token_f1": 0.2814,
+        "retrieval_hit_rate": 0.0,
+        "n_samples": 100
+      },
+      "failure_label_counts": {
+        "wrong_skip_decision": 32,
+        "bad_generation": 61,
+        "none": 7
+      },
+      "pct_retrieved": 0.0
+    },
+    "always_retrieve": {
+      "metrics": {
+        "exact_match": 0.05,
+        "rouge_l": 0.135,
+        "token_f1": 0.1308,
+        "retrieval_hit_rate": 0.35,
+        "n_samples": 100
+      },
+      "failure_label_counts": {
+        "ignored_evidence": 28,
+        "retrieval_miss": 64,
+        "unnecessary_retrieval": 3,
+        "none": 5
+      },
+      "pct_retrieved": 1.0
+    },
+    "selective": {
+      "metrics": {
+        "exact_match": 0.05,
+        "rouge_l": 0.1359,
+        "token_f1": 0.1317,
+        "retrieval_hit_rate": 0.3,
+        "n_samples": 100
+      },
+      "failure_label_counts": {
+        "ignored_evidence": 23,
+        "retrieval_miss": 60,
+        "unnecessary_retrieval": 3,
+        "none": 5,
+        "wrong_skip_decision": 9
+      },
+      "pct_retrieved": 0.91
+    }
+  }
+}

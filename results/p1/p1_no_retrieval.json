@@ -1,0 +1,1882 @@
+{
+  "mode": "no_retrieval",
+  "n_questions": 100,
+  "question_offset": 0,
+  "k": 5,
+  "metrics": {
+    "exact_match": 0.07,
+    "rouge_l": 0.2753,
+    "token_f1": 0.2814,
+    "retrieval_hit_rate": 0.0,
+    "n_samples": 100
+  },
+  "failure_label_counts": {
+    "wrong_skip_decision": 32,
+    "bad_generation": 61,
+    "none": 7
+  },
+  "pct_retrieved": 0.0,
+  "results": [
+    {
+      "question": "when was the last time anyone was on the moon",
+      "gold_answers": [
+        "14 December 1972 UTC",
+        "December 1972"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "December 14, 2020",
+      "exact_match": 0,
+      "rouge_l": 0.4,
+      "token_f1": 0.5714,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who wrote he ain't heavy he's my brother lyrics",
+      "gold_answers": [
+        "Bobby Scott",
+        "Bob Russell"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The lyrics to \"He Ain't Heavy, He's My Brother\" were written by Bobby Scott and Bob Russell.",
+      "exact_match": 0,
+      "rouge_l": 0.1905,
+      "token_f1": 0.2105,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "how many seasons of the bastard executioner are there",
+      "gold_answers": [
+        "one",
+        "one season"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Three seasons",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "when did the eagles win last super bowl",
+      "gold_answers": [
+        "2017"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "2017\n\n(Note: This answer is based on the most recent Super Bowl win by the Philadelphia Eagles as of the time this model was last trained",
+      "exact_match": 0,
+      "rouge_l": 0.0741,
+      "token_f1": 0.0741,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who won last year's ncaa women's basketball",
+      "gold_answers": [
+        "South Carolina"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Stanford University won last year's NCAA Women's Basketball Championship",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did the isle of wight become an island",
+      "gold_answers": [
+        "During the last Ice Age"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Isle of Wight has always been an island",
+      "exact_match": 0,
+      "rouge_l": 0.1429,
+      "token_f1": 0.1429,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "love yourself by justin bieber is about who",
+      "gold_answers": [
+        "Rihanna"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Justin Bieber",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who was the ruler of england in 1616",
+      "gold_answers": [
+        "James I"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "James I",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "what is the hot coffee mod in san andreas",
+      "gold_answers": [
+        "a normally inaccessible mini-game"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Hot Coffee mod: sex minigame",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.2222,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what is the maximum data rate for the 802.11a standard select one",
+      "gold_answers": [
+        "54\u00a0Mbit/s"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "54 Mbps",
+      "exact_match": 0,
+      "rouge_l": 0.4,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "which state is located in the centre of india",
+      "gold_answers": [
+        "Chhattisgarh",
+        "Madhya Pradesh"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Madhya Pradesh",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "who sang i ran all the way home",
+      "gold_answers": [
+        "The Impalas"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Flying Lizards sang \"I Ran All the Way Home.\"",
+      "exact_match": 0,
+      "rouge_l": 0.1667,
+      "token_f1": 0.1667,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where did the last name wallace come from",
+      "gold_answers": [
+        "a Scottish surname"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Origin uncertain, possibly of Scottish or Norman origin",
+      "exact_match": 0,
+      "rouge_l": 0.1818,
+      "token_f1": 0.1818,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who was the actor that played ben stone on law and order",
+      "gold_answers": [
+        "Michael Moriarty"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Michael Moriarty",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "who does the voice of nala in the lion king",
+      "gold_answers": [
+        "Niketa Calame",
+        "Sally Dworsky",
+        "Moira Kelly",
+        "Laura Williams"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The voice of Nala in \"The Lion King\" is provided by Beyonc\u00e9 in the 2019 remake, and by Moira Kelly in the original 1994 animated film.",
+      "exact_match": 0,
+      "rouge_l": 0.1429,
+      "token_f1": 0.1429,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays gram on the young and the restless",
+      "gold_answers": [
+        "Max Shippee"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Answer: Doris Roberts",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what is the oath that new citizens take",
+      "gold_answers": [
+        "United States Oath of Allegiance"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "I",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who is under the mask of darth vader",
+      "gold_answers": [
+        "Anakin Skywalker"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Anakin Skywalker.",
+      "exact_match": 0,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who had a baby at 100 in the bible",
+      "gold_answers": [
+        "Sarah",
+        "Abraham"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "There is no record in the Bible of anyone giving birth at the age of 100.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "what age do you need to be to buy a bb gun",
+      "gold_answers": [
+        "18"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Age requirement varies by location",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "ethiopia flight 961 crashes in to the sea",
+      "gold_answers": [
+        "23 November 1996"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "January 25, 1996\n(Ethiopian Airlines Flight 961 crashes into the Red Sea)",
+      "exact_match": 0,
+      "rouge_l": 0.1333,
+      "token_f1": 0.1333,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where was percy jackson and the olympians filmed",
+      "gold_answers": [
+        "Vancouver",
+        "Mission, British Columbia"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Various locations in California, USA",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "how many seasons of vampire diaries r there",
+      "gold_answers": [
+        "eight",
+        "8"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Eight seasons",
+      "exact_match": 0,
+      "rouge_l": 0.6667,
+      "token_f1": 0.6667,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "how many episodes are there in dragon ball z",
+      "gold_answers": [
+        "291 episodes",
+        "291"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Approx",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays auggie in the movie the wonder",
+      "gold_answers": [
+        "Jacob Tremblay"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Owen Wilson plays Auggie in the movie \"The Wonder.\"",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when was the first australian prime minister elected",
+      "gold_answers": [
+        "Sir Edmund Barton",
+        "1901"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Edmund Barton was the first Prime Minister of Australia, serving from September 1, 1901 to March 31, 1903",
+      "exact_match": 0,
+      "rouge_l": 0.1905,
+      "token_f1": 0.1905,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays matthew on anne with an e",
+      "gold_answers": [
+        "R. H. Thomson"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Graham Greene.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who is the girl in green day 21 guns",
+      "gold_answers": [
+        "Lisa Stelly"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The girl in Green Day's music video for \"21 Guns\" is Billie Joe Armstrong's wife, Adrienne Armstrong.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays joker in batman the dark knight",
+      "gold_answers": [
+        "Ledger"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Heath Ledger\n\n(Note: This answer is accurate as of the time of this response",
+      "exact_match": 0,
+      "rouge_l": 0.1333,
+      "token_f1": 0.1333,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "when was the south asian association for regional co-operation (saarc) formed",
+      "gold_answers": [
+        "December 1985",
+        "8 December 1985"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "August 8, 1985",
+      "exact_match": 0,
+      "rouge_l": 0.6667,
+      "token_f1": 0.6667,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when was the first hunger games book published",
+      "gold_answers": [
+        "September 14, 2008",
+        "2008"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The first Hunger Games book was published on September 14, 2008.",
+      "exact_match": 0,
+      "rouge_l": 0.4286,
+      "token_f1": 0.4286,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who did bette midler portray in the rose",
+      "gold_answers": [
+        "Mary Rose Foster"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Maude Fernbach",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who is the lead singer of depeche mode",
+      "gold_answers": [
+        "David Gahan"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Dave Gahan",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where did the butchers in the slaughterhouse cases live",
+      "gold_answers": [
+        "New Orleans"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Slaughterhouse Cases",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who developed the concept of total quality management",
+      "gold_answers": [
+        "W. Edwards Deming"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "W",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who wrote cant get you out of my head lyrics",
+      "gold_answers": [
+        "Cathy Dennis and Rob Davis",
+        "Rob Davis",
+        "Cathy Dennis"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The lyrics to \"Can't Get You Out of My Head\" were written by Cathy Dennis and Robbie Williams.",
+      "exact_match": 0,
+      "rouge_l": 0.25,
+      "token_f1": 0.2609,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where does no game no life anime end",
+      "gold_answers": [
+        "the Elkia Federation",
+        "the sixth volume"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The No Game, No Life anime has 12 episodes in its first season",
+      "exact_match": 0,
+      "rouge_l": 0.125,
+      "token_f1": 0.125,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did taylor swift's first album release",
+      "gold_answers": [
+        "October 24, 2006",
+        "2005"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "2006",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what are the three fifty shades of grey books",
+      "gold_answers": [
+        "Fifty Shades of Grey",
+        "Fifty Shades Darker",
+        "Fifty Shades Freed"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Fifty Shades of Grey, Fifty Shades Darker, Fifty Shades Freed.",
+      "exact_match": 0,
+      "rouge_l": 0.5714,
+      "token_f1": 0.5714,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who has the power (judicial) to make decisions in courts of law",
+      "gold_answers": [
+        "judges"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Judges.",
+      "exact_match": 0,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "what are the ranks in the us navy",
+      "gold_answers": [
+        "E-8s senior chief petty officer",
+        "E-9s master chief petty officer"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Enlisted Ranks: Seaman Recruit",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "i was a great islamic scholar and mathematician who died in 1131 ce",
+      "gold_answers": [
+        "Omar Khayyam"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Al-Biruni",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who is the coach for the ottawa senators",
+      "gold_answers": [
+        "Guy Boucher"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "D.J",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "last episode of what happens to my family",
+      "gold_answers": [
+        "53"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "I'm a question answering system and don't have the ability to access specific information about your family or the TV show \"What Happens to My Family.\" I can only provide answers based on the information I've been given",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when is the last time the vikings were in the nfc championship",
+      "gold_answers": [
+        "1976",
+        "2017/18"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Vikings have not appeared in the NFC Championship since the 2009 season.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "what are the colors of the netherlands flag",
+      "gold_answers": [
+        "blue",
+        "white",
+        "red"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Red, white, and blue",
+      "exact_match": 0,
+      "rouge_l": 0.4,
+      "token_f1": 0.4,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "where is lord's prayer found in bible",
+      "gold_answers": [
+        "in the Gospel of Luke"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Matthew 6:9-13, Luke 11:2-4.",
+      "exact_match": 0,
+      "rouge_l": 0.1538,
+      "token_f1": 0.2222,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when was the last time oklahoma won a national championship in football",
+      "gold_answers": [
+        "2003",
+        "2000"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "2000",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "location of the ten commandments in the bible",
+      "gold_answers": [
+        "Exodus",
+        "Deuteronomy"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Exodus 19:5, 20:1-17",
+      "exact_match": 0,
+      "rouge_l": 0.2857,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where did the allies go after north africa",
+      "gold_answers": [
+        "Italy",
+        "the Italian Campaign"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Italy",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "what is the meaning of veronica in english",
+      "gold_answers": [
+        "she who brings victory"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Veronica: a female given name, derived from the Latin name Veronica, meaning \"true image.\"",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what is the name of the main artery which takes blood from the heart to the body",
+      "gold_answers": [
+        "The aorta",
+        "aorta"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Aorta",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "who played solomon in little house on the prairie",
+      "gold_answers": [
+        "Todd Bridges"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Michael Landon played Solomon in \"Little House on the Prairie.\"",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who does eric end up with in that 70s show",
+      "gold_answers": [
+        "Donna"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Laurie Forman",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "an object that moves around an external axis is said to be",
+      "gold_answers": [
+        "revolution or orbital revolution",
+        "orbit"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "A top or a wheel are examples of objects that rotate around an external axis",
+      "exact_match": 0,
+      "rouge_l": 0.1053,
+      "token_f1": 0.1053,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "architectural elements forming rib vaults eg wells cathedral",
+      "gold_answers": [
+        "an armature of piped masonry",
+        "barrel vaults",
+        "two to three barrel vaults"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Rib vaults: Intersecting ribs and arches, Welles Cathedral: 14th century.",
+      "exact_match": 0,
+      "rouge_l": 0.1667,
+      "token_f1": 0.1667,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who sang the song good morning good morning",
+      "gold_answers": [
+        "Gene Kelly",
+        "Donald O'Connor",
+        "Judy Garland",
+        "Debbie Reynolds",
+        "Mickey Rooney"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Beatles sang \"Good Morning Good Morning.\"",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who wrote papa got a brand new bag",
+      "gold_answers": [
+        "James Brown"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "James Brown wrote and recorded \"Papa's Got a Brand New Bag\" in 1965.",
+      "exact_match": 0,
+      "rouge_l": 0.25,
+      "token_f1": 0.2667,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where does a roadrunner live in the desert",
+      "gold_answers": [
+        "mountainous shrubland",
+        "arid lowland"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Southwestern United States deserts",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who wrote it's a long long way to pasadena",
+      "gold_answers": [
+        "John Young",
+        "Harry Vanda",
+        "David Hemmings",
+        "George Young"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Randy Newman",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what's the dog's name on tom and jerry",
+      "gold_answers": [
+        "Spike"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Tom",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who are nominated for president of india 2017",
+      "gold_answers": [
+        "Meira Kumar",
+        "Ram Nath Kovind"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "No presidential elections were held in India in the year 2017",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where does the path train stop in newark",
+      "gold_answers": [
+        "Newark Penn Station"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Newark Penn Station.",
+      "exact_match": 0,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "where does route 66 start on the west coast",
+      "gold_answers": [
+        "in Santa Monica"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Santa Monica Pier, California.",
+      "exact_match": 0,
+      "rouge_l": 0.5714,
+      "token_f1": 0.5714,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who is the first wife on sister wives",
+      "gold_answers": [
+        "Meri"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Meri Brown",
+      "exact_match": 0,
+      "rouge_l": 0.6667,
+      "token_f1": 0.6667,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "when did houston go to the american league",
+      "gold_answers": [
+        "2013"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "1965, April 15",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "when did they stop cigarette advertising on television",
+      "gold_answers": [
+        "January 2, 1971",
+        "1970"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "In the U.S., cigarette advertising on television was banned starting in 1971.",
+      "exact_match": 0,
+      "rouge_l": 0.125,
+      "token_f1": 0.1333,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "coldplay song i will try to fix you",
+      "gold_answers": [
+        "\"Fix You\""
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "\"I Will Try to Fix You\" is a song by Coldplay from their second studio album, \"A Rush of Blood to the Head,\" released in 2002.",
+      "exact_match": 0,
+      "rouge_l": 0.1429,
+      "token_f1": 0.1429,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "points on a sphere or angles in a circle are measured in units called",
+      "gold_answers": [
+        "radians"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Degrees or radians",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "the oligodynamic effect is a phenomenon that describes",
+      "gold_answers": [
+        "a biocidal effect of metals"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The oligodynamic effect is a bactericidal property of certain metals, especially copper and silver, when in low concentrations.",
+      "exact_match": 0,
+      "rouge_l": 0.2609,
+      "token_f1": 0.3478,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where does the white witch live in narnia",
+      "gold_answers": [
+        "her castle"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The White Witch, also known as Jadis, resides in the frozen region of Narnia called the Land of Always Winter, Always Dark.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "how many games in a row have the uconn women's basketball team won",
+      "gold_answers": [
+        "111 straight wins",
+        "111",
+        "90"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "I don't have real-time access to databases or the ability to browse the web",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "is there a name for the at symbol",
+      "gold_answers": [
+        "commercial at",
+        "at symbol",
+        "at sign"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Yes, the at symbol is also known as the \"@\" sign.",
+      "exact_match": 0,
+      "rouge_l": 0.3333,
+      "token_f1": 0.3333,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who sings the theme song for the tv show cops",
+      "gold_answers": [
+        "Inner Circle",
+        "Jamaican reggae band Inner Circle"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The theme song for the TV show \"Cops\" is called \"Bad Boys\" and is performed by Inner Circle.",
+      "exact_match": 0,
+      "rouge_l": 0.2,
+      "token_f1": 0.2,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when was corporal punishment banned in south africa",
+      "gold_answers": [
+        "1997"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Constitutional Court of South Africa declared corporal punishment in schools unconstitutional in 1997",
+      "exact_match": 0,
+      "rouge_l": 0.1333,
+      "token_f1": 0.1333,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays captain phasma in star wars the force awakens",
+      "gold_answers": [
+        "Gwendoline Christie"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Gwendoline Christie.",
+      "exact_match": 0,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who sings she's like the wind lyrics",
+      "gold_answers": [
+        "Wendy Fraser",
+        "Patrick Swayze"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Pat Benatar",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did marathon change its name to snickers",
+      "gold_answers": [
+        "19 July 1990"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Marathon did not change its name to Snickers",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who captained the first european ship to sail around the tip of africa",
+      "gold_answers": [
+        "Bartolomeu Dias"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Vasco da Gama",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who ordered the forbidden city to be built",
+      "gold_answers": [
+        "Zhu Di"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Emperor Zhudi of Ming Dynasty",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who sang let me tell you about the birds and the bees",
+      "gold_answers": [
+        "Jewel Akens"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Answer: Bobby Vinton",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who has the power to approve or veto legislation constitution",
+      "gold_answers": [
+        "the President"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The President of the United States can approve or veto legislation.",
+      "exact_match": 0,
+      "rouge_l": 0.3077,
+      "token_f1": 0.3077,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "how many seasons of the rugrats are there",
+      "gold_answers": [
+        "9 seasons",
+        "9"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "13 seasons",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who is the minister of local government in zimbabwe",
+      "gold_answers": [
+        "Hon July Moyo"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "July Moyo",
+      "exact_match": 0,
+      "rouge_l": 0.8,
+      "token_f1": 0.8,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what was the initial effect of the transition from command to market economies in eastern europe",
+      "gold_answers": [
+        "Inequality of opportunity"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Economic instability and hardship",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did toyota start making cars in the us",
+      "gold_answers": [
+        "by the early 1980s",
+        "1984"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "1957",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "how many pieces in a terry's chocolate orange",
+      "gold_answers": [
+        "six",
+        "20"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Approximately 24 segments",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who plays the saint of killers on preacher",
+      "gold_answers": [
+        "Graham McTavish"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Graham McTavish.",
+      "exact_match": 0,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did the royal proclamation of 1763 end",
+      "gold_answers": [
+        "the American Revolutionary War",
+        "with the American Revolutionary War",
+        "1783"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "November 1, 1763.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who is playing the halftime show at super bowl 2016",
+      "gold_answers": [
+        "Beyonc\u00e9",
+        "Coldplay",
+        "Bruno Mars"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Coldplay, Beyonc\u00e9",
+      "exact_match": 0,
+      "rouge_l": 0.6667,
+      "token_f1": 0.6667,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "jonny cash one piece at a time car",
+      "gold_answers": [
+        "Cadillac"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "\"One Piece at a Time\"",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "what is the minimum wage in france per hour",
+      "gold_answers": [
+        "11.16",
+        "\u20ac9.88 per hour."
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The minimum wage in France is currently 10.10 Euros per hour",
+      "exact_match": 0,
+      "rouge_l": 0.25,
+      "token_f1": 0.2857,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "describe the three phases of the normal blood clotting process",
+      "gold_answers": [
+        "blood coagulation",
+        "vasoconstriction,"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "1",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "when did amnesia the dark descent come out",
+      "gold_answers": [
+        "8 September 2010"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Amnesia: The Dark Descent was released on September 8, 2010.",
+      "exact_match": 0,
+      "rouge_l": 0.3077,
+      "token_f1": 0.4615,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "what is the oldest street in the philippines",
+      "gold_answers": [
+        "Cebu City",
+        "Colon Street"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The oldest documented street in the Philippines is Calle Real in Intramuros, Manila",
+      "exact_match": 0,
+      "rouge_l": 0.1333,
+      "token_f1": 0.1333,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "where is the tibia and fibula bone located",
+      "gold_answers": [
+        "leg"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Lower leg: tibia",
+      "exact_match": 0,
+      "rouge_l": 0.5,
+      "token_f1": 0.5,
+      "retrieval_hit": false,
+      "failure_label": "wrong_skip_decision"
+    },
+    {
+      "question": "who played bat masterson in the tv series",
+      "gold_answers": [
+        "Gene Barry"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Gene Barry",
+      "exact_match": 1,
+      "rouge_l": 1.0,
+      "token_f1": 1.0,
+      "retrieval_hit": false,
+      "failure_label": "none"
+    },
+    {
+      "question": "who sings sugar sugar you are my candy girl",
+      "gold_answers": [
+        "the Archies"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "The Archies, a fictional band in comic books and cartoons, sang \"Sugar, Sugar\" in 1969.",
+      "exact_match": 0,
+      "rouge_l": 0.2353,
+      "token_f1": 0.2353,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "types of skiing in the winter olympics 2018",
+      "gold_answers": [
+        "Slalom",
+        "Downhill",
+        "Super-G",
+        "Giant slalom",
+        "Slalom \u2013 (SC)"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Alpine Skiing, Cross-Country Skiing, Freestyle Skiing, Snowboarding, Ski Jumping.",
+      "exact_match": 0,
+      "rouge_l": 0.0,
+      "token_f1": 0.0,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    },
+    {
+      "question": "who plays noah newman on the young and the restless",
+      "gold_answers": [
+        "Robert Gillespie Adamson IV"
+      ],
+      "mode": "no_retrieval",
+      "retrieval_decision": false,
+      "router_response": null,
+      "max_retrieval_score": null,
+      "score_gate_applied": false,
+      "chunks": [],
+      "prediction": "Robert Adamson.",
+      "exact_match": 0,
+      "rouge_l": 0.6667,
+      "token_f1": 0.6667,
+      "retrieval_hit": false,
+      "failure_label": "bad_generation"
+    }
+  ]
+}
