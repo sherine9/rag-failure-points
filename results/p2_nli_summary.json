@@ -1,0 +1,17 @@
+{
+  "3a_reranking": {
+    "nli_mean_unlocked": 0.425
+  },
+  "3b_P1_soft": {
+    "nli_mean": 0.5032,
+    "n_valid": 79
+  },
+  "3b_P2_strict_short": {
+    "nli_mean": 0.3717,
+    "n_valid": 100
+  },
+  "3b_P3_strict_verbose": {
+    "nli_mean": 0.3146,
+    "n_valid": 98
+  }
+}
