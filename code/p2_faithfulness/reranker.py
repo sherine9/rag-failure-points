@@ -27,7 +27,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 RERANKER_MODEL  = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 DEFAULT_CACHE   = "/scratch/hf_cache"
-DEFAULT_TOP_K   = 5
+DEFAULT_TOP_K   = 3
 
 
 # ── 1. Model loading ──────────────────────────────────────────────────────────
