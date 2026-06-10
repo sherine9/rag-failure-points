@@ -1,1 +1,3 @@
 notebooks/.nfs*
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
